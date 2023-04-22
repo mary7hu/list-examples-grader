@@ -14,7 +14,14 @@ fi
 
 cp student-submission/ListExamples.java ./
 
-javac -cp $CPATH *.java
+javac -cp $CPATH *.java 2> log.txt
+
+if [[ $? -ne 0 ]]
+then
+  echo 'Compile error'
+  cat log.txt
+  exit
+fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > junit-output.txt
 
